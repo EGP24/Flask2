@@ -2,8 +2,8 @@
 
 {% block content %}
     {% if "строитель" in profession or "инженер" in profession %}
-        <img src="../static/img/ship1.jpg" alt="Инженерные тренажеры">
+        <img src="{{ url_for('static', filename='img/ship1.jpg') }}" alt="Инженерные тренажеры">
     {% else %}
-        <img src="../static/img/ship2.jpg" alt="Научные симуляторы">
+        <img src="{{ url_for('static', filename='img/ship2.jpg') }}" alt="Научные симуляторы">
     {% endif %}
 {% endblock %}
