@@ -25,7 +25,9 @@ def list_prof(lst):
 @app.route('/answer')
 @app.route('/auto_answer')
 def answer():
-    kwargs = {'title': 'Анкета'}
+    form = {'surname': 'Wanty', 'name': 'Mark', 'education': 'выше среднего', 'profession': 'штурман марсохода',
+            'sex': 'male', 'motivation': ' Всегда мечтал застрять на Марсе!', 'ready': 'True'}
+    return render_template('auto_answer.html', title='Анкета', **form)
 
 
 if __name__ == '__main__':

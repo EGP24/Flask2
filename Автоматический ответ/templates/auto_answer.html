@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
+    {% set dct = {
+                    'Фамилия': surname,
+                    'Имя': name,
+                    'Образование': education,
+                    'Профессия': profession,
+                    'Пол': sex,
+                    'Мотивация': motivation,
+                    'Готовы остаться на Марсе?': ready
+                 } %}
+    {% for key in dct %}
+        <h3>{{ key }}: {{ dct[key] }}</h3>
+    {% endfor %}
+{% endblock %}
