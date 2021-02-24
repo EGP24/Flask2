@@ -14,7 +14,7 @@ def training(prof):
     return render_template('training.html', profession=prof, title='Тренировка')
 
 
-@app.route('/list_prof/<list>')
+@app.route('/list_prof/<lst>')
 def list_prof(lst):
     profs = ['инженер-исследователь', 'пилот', 'строитель', 'экзобиолог', 'врач', 'инженер по терраформированию',
              'климатолог', 'специалитс по радиоционной защите', 'астрогеолог', 'гляциолог', 'инженер жизнеобеспечения',
