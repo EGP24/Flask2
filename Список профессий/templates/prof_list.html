@@ -1,12 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for prof in profs %}
-        {% if list == 'ol' %}
-            {{ loop.index }}. {{ prof }}
-            </br>
-        {% else %}
+    <{{ list }}>
+        {% for prof in profs %}
             <li> {{ prof }}</li>
-        {% endif %}
-    {% endfor %}
+        {% endfor %}
+    </{{ list }}>
 {% endblock %}
