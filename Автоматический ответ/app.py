@@ -23,11 +23,17 @@ def list_prof(lst):
 
 
 @app.route('/answer')
-@app.route('/auto_answer')
 def answer():
-    form = {'surname': 'Wanty', 'name': 'Mark', 'education': 'выше среднего', 'profession': 'штурман марсохода',
-            'sex': 'male', 'motivation': ' Всегда мечтал застрять на Марсе!', 'ready': 'True'}
-    return render_template('auto_answer.html', title='Анкета', **form)
+    form = {'Фамилия': 'Wanty', 'Имя': 'Mark', 'Образование': 'выше среднего', 'Профессия': 'штурман марсохода',
+            'Пол': 'male', 'Мотивация': 'Всегда мечтал застрять на Марсе!', 'Готовы остаться на Марсе?': 'True'}
+    return render_template('auto_answer.html', title='Анкета', form=form)
+
+
+@app.route('/auto_answer/<surname>/<name>/<education>/<profession>/<sex>/<motivation>/<ready>')
+def auto_answer(surname, name, education, profession, sex, motivation, ready):
+    form = {'Фамилия': surname, 'Имя': name, 'Образование': education, 'Профессия': profession,
+            'Пол': sex, 'Мотивация': motivation, 'Готовы остаться на Марсе?': ready}
+    return render_template('auto_answer.html', title='Анкета', form=form)
 
 
 if __name__ == '__main__':
