@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
+    {% set peremennaay = 'Каюта №' %}
+    <h2>Размещение по каютам</h2>
+    {% for men in man %}
+        <h3>{{ men }} - {{ peremennaay }} {{ loop.index }} {% if loop.first %} - капитан корабля {% endif %}</h3>
+    {% endfor %}
+{% endblock %}
