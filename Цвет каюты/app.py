@@ -46,7 +46,7 @@ def distribution():
 def table(sex, age):
     color = (255, 0, randint(0, 255)) if sex == 'female' else (0, randint(0, 255), 255)
     color = [f'{"0" * int(len(hex(i)) == 3)}{hex(i)[2:]}' for i in color]
-    return render_template('table.html', title='Анкета', color=','.join(color), age=age)
+    return render_template('table.html', title='Анкета', color=''.join(color), age=age)
 
 
 if __name__ == '__main__':
