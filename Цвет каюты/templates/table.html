@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table border="1">
+        <caption>Оформление каюты</caption>
+        <tr><td>Цвет каюты</td><td>Эмблема</td></tr>
+        <tr>
+            <td bgcolor="#{{ color }}">
+            </td>
+            <td>
+                {% if age >= 21 %}
+                    <img src="{{ url_for('static', filename='img/adult.png') }}">
+                {% else %}
+                    <img src="{{ url_for('static', filename='img/child.png') }}">
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+{% endblock %}

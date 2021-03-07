@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-
+from random import randint
 app = Flask(__name__)
 
 
@@ -40,6 +40,14 @@ def auto_answer(surname, name, education, profession, sex, motivation, ready):
 def distribution():
     man = ['Переверза Владислав', 'Фесенко Артём', 'Соловьёв Александр', 'Ридли Скотт', 'Энди Уир']
     return render_template('distribution.html', title='Анкета', man=man)
+
+
+@app.route('/table/<sex>/<int:age>')
+def table(sex, age):
+    image_path = 'img/child.png' if age < 21 else 'img/adult.png'
+    color = (255, 0, randint(0, 255)) if sex == 'female' else (0, randint(0, 255), 255)
+    color = [f'{"0" * int(len(hex(i)) == 3)}{hex(i)[2:]}' for i in color]
+    return render_template('table.html', title='Анкета', color=','.join(color), age=age)
 
 
 if __name__ == '__main__':
