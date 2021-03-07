@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request
 from random import randint
 from datetime import datetime
+from form import MyForm
+from werkzeug.utils import secure_filename
 import os
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'my_secret_key_also_fesenko_lox)))'
 
 
 @app.route('/<title>')
@@ -53,16 +56,17 @@ def table(sex, age):
 
 @app.route('/gallery', methods=['POST', 'GET'])
 def gallery():
-    if request.method == 'POST':
-        if not os.path.exists('static/img'):
-            os.mkdir('static/img')
-        if not os.path.exists('static/img/gallery'):
-            os.mkdir('static/img/gallery')
-
-        with open(f'static/img/gallery/user_image-{str(datetime.now()).replace(":", "-")}.jpg', 'wb') as file:
-            file.write(request.files['file'].read())
+    form = MyForm()
+    if not os.path.exists('static/img'):
+        os.mkdir('static/img')
+    if not os.path.exists('static/img/gallery'):
+        os.mkdir('static/img/gallery')
+    if form.validate_on_submit():
+        file = form.image.data
+        filename = secure_filename(f'user_image_{datetime.now()}')
+        file.save(f'static/img/gallery/{filename}.jpg')
     images_path = os.listdir('static/img/gallery')
-    return render_template('gallery.html', title='Анкета', images_path=images_path)
+    return render_template('gallery.html', title='Анкета', images_path=images_path, form=form)
 
 
 if __name__ == '__main__':
