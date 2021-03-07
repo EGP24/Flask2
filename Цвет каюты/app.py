@@ -44,7 +44,6 @@ def distribution():
 
 @app.route('/table/<sex>/<int:age>')
 def table(sex, age):
-    image_path = 'img/child.png' if age < 21 else 'img/adult.png'
     color = (255, 0, randint(0, 255)) if sex == 'female' else (0, randint(0, 255), 255)
     color = [f'{"0" * int(len(hex(i)) == 3)}{hex(i)[2:]}' for i in color]
     return render_template('table.html', title='Анкета', color=','.join(color), age=age)
