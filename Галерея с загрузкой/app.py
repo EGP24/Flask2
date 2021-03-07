@@ -1,5 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from random import randint
+from datetime import datetime
+import os
 app = Flask(__name__)
 
 
@@ -47,6 +49,20 @@ def table(sex, age):
     color = (255, 0, randint(0, 255)) if sex == 'female' else (0, randint(0, 255), 255)
     color = [f'{"0" * int(len(hex(i)) == 3)}{hex(i)[2:]}' for i in color]
     return render_template('table.html', title='Анкета', color=''.join(color), age=age)
+
+
+@app.route('/gallery', methods=['POST', 'GET'])
+def gallery():
+    if request.method == 'POST':
+        if not os.path.exists('static/img'):
+            os.mkdir('static/img')
+        if not os.path.exists('static/img/gallery'):
+            os.mkdir('static/img/gallery')
+
+        with open(f'static/img/gallery/user_image-{str(datetime.now()).replace(":", "-")}.jpg', 'wb') as file:
+            file.write(request.files['file'].read())
+    images_path = os.listdir('static/img/gallery')
+    return render_template('gallery.html', title='Анкета', images_path=images_path)
 
 
 if __name__ == '__main__':
