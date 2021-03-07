@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% set member = members|random %}
+    <div class="text-center">
+        <h3>{{ member['name'] }} {{ member['surname'] }}</h3>
+        <img src="{{ url_for('static', filename=member['photo']) }}">
+        <h5>{{ member['profession']|sort|join(', ') }}</h5>
+    </div>
+{% endblock %}

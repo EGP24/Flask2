@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from random import randint
 from datetime import datetime
+import json
 import os
 app = Flask(__name__)
 
@@ -63,6 +64,13 @@ def gallery():
             file.write(request.files['file'].read())
     images_path = os.listdir('static/img/gallery')
     return render_template('gallery.html', title='Анкета', images_path=images_path)
+
+
+@app.route('/member')
+def member():
+    with open('templates/members.json', encoding='utf8') as file:
+        data = json.load(file)
+    return render_template('member.html', title='Анкета', members=data)
 
 
 if __name__ == '__main__':
